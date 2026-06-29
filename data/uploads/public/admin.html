@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة الإدارة - مركز الحكيم</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fa;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+color:#0b2b40;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+textarea{
+height:200px;
+}
+
+button{
+background:#0b2b40;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>لوحة إدارة مركز الحكيم</h1>
+
+<h3>إضافة مقال جديد</h3>
+
+<input id="title" placeholder="عنوان المقال">
+
+<textarea id="content" placeholder="محتوى المقال"></textarea>
+
+<button onclick="publishArticle()">
+نشر المقال
+</button>
+
+</div>
+
+<script>
+function publishArticle(){
+
+const title =
+document.getElementById("title").value;
+
+const content =
+document.getElementById("content").value;
+
+if(!title || !content){
+alert("يرجى إدخال العنوان والمحتوى");
+return;
+}
+
+fetch("/api/articles",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+title,
+content
+})
+})
+.then(res=>res.json())
+.then(()=>{
+alert("تم نشر المقال بنجاح");
+document.getElementById("title").value="";
+document.getElementById("content").value="";
+});
+}
+</script>
+
+</body>
+</html>
