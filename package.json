@@ -1,0 +1,12 @@
+{
+  "name": "alhakim-strategic-studies-center",
+  "version": "1.0.0",
+  "description": "مركز الحكيم للدراسات والسياسات الاستراتيجية",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
